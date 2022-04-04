@@ -9,7 +9,7 @@ updater.bot.set_my_commands([('start', 'Pontapé inicial'), ('help', 'VAR nas fu
 for handler in handlersList:
     updater.dispatcher.add_handler(handler)
 
-# updater.start_webhook(listen="0.0.0.0", port=int(config.PORT), url_path=config.TOKEN)
-# updater.bot.setWebhook(config.HEROKU + config.TOKEN)
+updater.start_webhook(listen="0.0.0.0", port=int(config.PORT), url_path=config.TOKEN)
+updater.bot.setWebhook(config.HEROKU + config.TOKEN)
 
-updater.start_polling()
+# updater.start_polling()
