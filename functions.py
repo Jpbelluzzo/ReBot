@@ -13,16 +13,17 @@ def help(update: Update, context: CallbackContext):
 
 # Informs the lineup of a team for a game to users subscribed to this team
 def escalacao(update: Update, context: CallbackContext):
-    time = context.args[0]                                              # team passed as parameter
+    team = context.args[0]                                              # team passed as parameter
     result = db.query(queries.get_equipes)                              # verify if team is available
-    if ((result == None) or (time not in result)):                          
+    teams = [r[0] for r in result]
+    if ((result == None) or (team.upper() not in teams)):                          
         update.message.reply_text('Esse time ainda não tá disponível :(')
     else:                                                               # if team is available...
         user = update.message.from_user.username                        # get username
-        result = db.query(queries.get_usuarios_equipe, [time])          # verify if user has already subscribed to this team
-        if user in result:
-            update.message.reply_text(emoji.emojize('Você já está acompanhando as escalações desse time :wink:', language='en'))
+        result = db.query(queries.get_usuarios_equipe, [team])          # verify if user has already subscribed to this team
+        if user in result[0][0]:
+            update.message.reply_text(emoji.emojize('Você já está acompanhando as escalações desse time :winking_face:', language='en'))
         else:                                                           # if user has not subscribed to this team yet
-            result = db.query(queries.set_equipe_usuarios, [user, time])
-            str = 'Agora você está acompanhando as escalações do ' + time + ' :wink:'
+            db.query(queries.set_equipe_usuarios, [user, team])
+            str = 'Agora você está acompanhando as escalações do ' + team + ' :winking_face:'
             update.message.reply_text(emoji.emojize(str, language='en'))

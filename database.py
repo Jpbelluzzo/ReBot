@@ -18,11 +18,14 @@ def query(command, parameters=[]):
         connect()
         cursor = connection.cursor()
         cursor.execute(command, vars=tuple(parameters))
-        result = cursor.fetchall()
+        print(cursor.query)
+        if ('SELECT' in command[:6] and cursor.rowcount>0):
+            result = cursor.fetchall()
     except:
         print('Error while executing query :(')      
     finally:
         if connection:
+            connection.commit()
             cursor.close()
             connection.close()
         return result
