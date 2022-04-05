@@ -12,7 +12,6 @@ def help(update: Update, context: CallbackContext):
 
 def escalacao(update: Update, context: CallbackContext):
     time = context.args[0]
-    update.message.reply_text(time)
     result = db.query(queries.get_escalacao_equipes)
-    if (result == None):
+    if ((result == None) or (time not in result)):
         update.message.reply_text(emoji.emojize('Esse time ainda não tá disponível :('))
