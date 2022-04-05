@@ -11,6 +11,8 @@ def help(update: Update, context: CallbackContext):
     update.message.reply_text(emoji.emojize('Camarada, posso fazer isso daqui ó:\n\n/start \- Pontapé inicial\n/help \- VAR nas funcionalidades\n\nEstou no processo de desenvolvimento, se tiver sugestões, mande em [Jpbelluzzo \- ReBot](https://github.com/Jpbelluzzo/ReBot)', language='es'), parse_mode='MarkdownV2')
 
 def escalacao(update: Update, context: CallbackContext):
+    time = context.args[0]
+    print(time)
     result = db.query(queries.get_escalacao_equipes)
     if (result == None):
         update.message.reply_text(emoji.emojize('Esse time ainda não tá disponível :('))
