@@ -4,7 +4,7 @@ from telegram.ext import Updater
 
 updater = Updater(config.TOKEN, use_context=True)
 
-updater.bot.set_my_commands([('start', 'Pontapé inicial'), ('help', 'VAR nas funcionalidades')])
+updater.bot.set_my_commands([('start', 'Pontapé inicial'), ('help', 'VAR nas funcionalidades'), ('escalacao', 'Veja a escalação do seu time pro jogo que vai rolar')])
 
 for handler in handlersList:
     updater.dispatcher.add_handler(handler)
