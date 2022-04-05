@@ -14,7 +14,7 @@ def help(update: Update, context: CallbackContext):
 # Informs the lineup of a team for a game to users subscribed to this team
 def escalacao(update: Update, context: CallbackContext):
     time = context.args[0]                                              # team passed as parameter
-    result = db.query(queries.get_escalacao_equipes)                    # verify if team is available
+    result = db.query(queries.get_equipes)                              # verify if team is available
     if ((result == None) or (time not in result)):                          
         update.message.reply_text('Esse time ainda não tá disponível :(')
     else:                                                               # if team is available...
